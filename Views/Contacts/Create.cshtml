@@ -1,17 +1,18 @@
 ﻿@using ContactPro.Services.Interfaces;
 @model ContactPro.Models.Contact
 @inject IImageService _ImageService
+@inject IAddressBookService _AddressBookService
 @{
     ViewData["Title"] = "Create";
 }
-<h1>CREATE CONTACT</h1>
-<div class="p-3 border border-2 shadow-lg bg-light">
-    <form asp-action="Create" method="post" enctype="multipart/form-data">
+<h1 class="emphasisTitle text-center">CREATE CONTACT</h1>
+<div class="floatingContainer p-3">
+   <form asp-action="Create" method="post" enctype="multipart/form-data">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="row g-3 p-2">
             <div class="col-12 col-lg-4">
                 <div class="square-img-container">
-                    <img id="contactImage" class="square-img" src="~/img/DefaultContactImage.png">
+                    <img id="contactImage" class="square-img" src="~/img/SharkSillouette.png">
                 </div>
                 <div>
                     <input asp-for="ImageFile" class="form-control" accept=".png,.jpg,.jpeg,.gif" onchange="document.getElementById('contactImage').src= window.URL.createObjectURL(this.files[0])" />

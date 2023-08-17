@@ -4,38 +4,51 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
-
+<h1 class="text-center emphasisTitle p-3">Categories</h1>
+<div class="floatingContainer my-3">
+    <table class="table">
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Name)
+                    </td>
+                    <td class="text-end">
+                        <a class="me-3 editIcons" asp-action="Edit" asp-route-id="@item.Id"><i class="bi bi-pencil-fill "></i></a>
+                        <a class="me-3 editIcons" asp-action="EmailCategory" asp-route-id="@item.Id"><i class="bi bi-envelope-fill "></i></a>
+                        <a class="me-3 editIcons" asp-action="Delete" asp-route-id="@item.Id"><i class="bi bi-trash-fill text-danger "></i></a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
 <p>
-    <a asp-action="Create">Create New</a>
+    <a class="btn btn-lg btn-outline-primary rounded-pill my-3" asp-action="Create" asp-controller="Categories">New Category<i class="bi bi-bookmark-plus-fill ps-2"></i></a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AppUser)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AppUser.Id)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
-            </td>
-        </tr>
+@section scripts{
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <!--Sweet Alerts-->
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        let message = '@(ViewBag.SwalMessage)';
+        if (!message.includes("Error") && message != '') {
+            Swal.fire({
+                backdrop: false,
+                icon: 'success',
+                title: message,
+                showConfirmButton: true
+            });
+        } else if (message.includes("Error")) {
+            Swal.fire({
+                backdrop: false,
+                icon: 'error',
+                title: 'Oops...',
+                text: message
+            });
+        }
+    </script>
 }
-    </tbody>
-</table>

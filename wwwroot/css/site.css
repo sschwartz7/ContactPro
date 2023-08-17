@@ -3,17 +3,26 @@
     --cf-primaryColorDark: hsl(348, 79%, 61%);
     --cf-primaryColorLight: hsl(348, 79%, 91%);
     --cf-secondaryColor: hsl(197, 94%, 67%);
+    --cf-secondaryColorDark: hsl(197, 94%, 37%);
     --cf-secondaryColorLight: hsl(197, 94%, 87%);
     --cf-dark-color: #131313;
     --cf-light-gray: #d9d9d9;
     --cf-light-color: #eeeeee;
     --cf-title-font: 'Fira Sans', sans-serif;
     --cf-body-font: 'Roboto', sans-serif;
+    --cf-other-font: 'Pacifico', cursive;
 }
 
 html,
 body {
     height: 100%;
+}
+
+.emphasisTitle {
+    font-family: var(--cf-other-font) !important;
+    color: var(--cf-secondaryColor) !important;
+    text-shadow: 0px 7px var(--cf-light-color);
+    font-size: 3rem;
 }
 
 body {
@@ -38,17 +47,17 @@ body {
     .btn-outline-primary:active,
     .btn-outline-primary:focus {
         border-color: var(--cf-secondaryColor) !important;
-        background-color: var(--cf-primaryColor);
+        background-color: var(--cf-primaryColor) !important;
     }
 
 .btn-primary {
     color: white !important;
-    background-color: var(--cf-primaryColor) !important;
-    border-color: var(--cf-secondary-color);
+    background-color: var(--cf-secondaryColor) !important;
+    border-color: var(--cf-secondary-color)!important;
 }
 
     .btn-primary:hover {
-        filter: brightness(1.2) !important;
+        filter: brightness(.8) !important;
         border-color: var(--cf-primaryColorDark);
     }
 
@@ -72,7 +81,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: var(--cf-title-font);
+    font-family: var(--cf-body-font);
     font-weight: 600;
     text-transform: uppercase;
 }
@@ -83,9 +92,10 @@ main {
 
 .content {
     flex: 1 0 auto;
-    padding-top: 7.5rem;
+    padding-top: 2.5rem;
     padding-bottom: 2.5rem;
 }
+
 
 .heroCard {
     min-height: 100%;
@@ -124,17 +134,18 @@ main {
     box-shadow: 0px 15px 30px rgba(0, 0, 0, 0.1);
 }
 
-.sideNav {
+.floatingContainer {
     border-radius: 25px;
     border-color: var(--cf-light-color);
     border-style: solid;
     border-width: 3px;
-    background-color: var(--cf-secondaryColor);
+    background-color: var(--cf-light-color);
     padding-top: 2rem;
     padding-bottom: 2rem;
     padding-left: 1rem;
     padding-right: 1rem;
     height: fit-content;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
 }
 
 .editIcons {
@@ -191,6 +202,7 @@ main {
     background-color: var(--cf-primaryColorLight);
     border-color: var(--cf-light-gray);
     border-style: solid;
+
 }
 
     .square-img-container::after {
@@ -212,12 +224,26 @@ main {
     height: 3.5rem;
     margin: 0rem .3rem;
 }
+.contactpic{
+    height: 150px;
+}
+
+/*.floatingContainer {
+    background-color: var(--cf-light-color);
+    border-radius: 15px;
+    box-shadow: 0px 7px 10px rgba(0, 0, 0, 0.5);
+}*/
 
 figcaption {
     color: var(--cf-dark-color);
     font-size: 0.8rem;
     text-align: center;
 }
+.dropdown-menu{
+    background-color: var(--cf-light-color) !important;
+    font-size: 2rem;
+}
+
 /* X-Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px) {
     .heroTitle {
