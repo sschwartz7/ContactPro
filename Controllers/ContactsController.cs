@@ -234,9 +234,10 @@ namespace ContactPro.Controllers
                 return NotFound();
             }
 
+            string userId = _userManager.GetUserId(User)!;
             var contact = await _context.Contacts
                 .Include(c => c.AppUser)
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id && m.AppUserId == userId);
             if (contact == null)
             {
                 return NotFound();

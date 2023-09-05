@@ -6,22 +6,25 @@
 
 <h1 class="emphasisTitle text-center">Create</h1>
 
-<div class="row floatingContainer p-3 justify-content-center">
-    <div class="col-md-4">
+<div class="row floatingContainer p-3">
+    <div class="col-9 col-lg-10">
         <form asp-action="Create" asp-controller="Categories" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <input asp-for="Name" class="form-control" placeholder="Please enter category name." />
+                <div class="input-group">
+                    <input class="form-control"
+                           asp-action="Create"
+                           placeholder="Please Enter a Category Name" />
+                    <input type="submit" class="btn btn-lg btn-primary" value="Save" />
+                </div>
+            </div>
 
-            </div>
-            <div class="col-12 d-flex justify-content-between mt-2 ">
-                <a asp-action="Index" class="btn btn-lg btn-outline-secondary rounded-pill">Cancel</a>
-                <button type="submit" class="btn btn-lg btn-primary rounded-pill">Save</button>
-            </div>
         </form>
     </div>
+    <div class="col d-flex justify-content-center">
+        <a asp-action="Index" class="btn btn-lg btn-outline-secondary rounded-pill">Cancel</a>
+    </div>
 </div>
-
 
 @section Scripts {
     @{

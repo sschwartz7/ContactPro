@@ -22,12 +22,15 @@ namespace ContactPro.Areas.Identity.Pages.Account
     {
         private readonly SignInManager<AppUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        readonly IConfiguration _configuration;
 
-        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<AppUser> signInManager, ILogger<LoginModel> logger, IConfiguration configuration)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _configuration = configuration;
         }
+
 
         /// <summary>
         ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
@@ -102,10 +105,25 @@ namespace ContactPro.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
         }
 
-        public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string returnUrl = null, string demoLoginEmail = null)
         {
             returnUrl ??= Url.Content("~/");
-
+            if (!string.IsNullOrEmpty(demoLoginEmail))
+            {
+                string email = _configuration[demoLoginEmail] ?? Environment.GetEnvironmentVariable(demoLoginEmail);
+                string password = _configuration["DemoLoginPassword"] ?? Environment.GetEnvironmentVariable("DemoLoginPassword");
+                var result = await _signInManager.PasswordSignInAsync(email, password, false, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User logged in.");
+                    return LocalRedirect(returnUrl);
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid demo login attempt.");
+                    return Page();
+                }
+            }
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             if (ModelState.IsValid)
