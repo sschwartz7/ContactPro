@@ -10,24 +10,28 @@
     <div class="col-9 col-lg-10">
         <form asp-action="Edit" asp-controller="Categories" method="post">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <input type="hidden" asp-for="AppUserId" />
+            <input type="hidden" asp-for="AppUser" value="@Model.AppUser" />
             <div class="form-group">
-                         <div class="input-group">
+                <div class="input-group">
                     <input class="form-control"
-                    asp-action="Edit"
+                           asp-action="Edit"
+                           asp-for="Name"
                            placeholder="@Model.Name" />
                     <input type="submit" class="btn btn-lg btn-primary" value="Save" />
-                </div> 
                 </div>
+            </div>
 
         </form>
-        </div>       
-        <div class="col d-flex justify-content-center">
+    </div>
+    <div class="col d-flex justify-content-center">
         <a asp-action="Index" class="btn btn-lg btn-outline-secondary rounded-pill">Cancel</a>
     </div>
 </div>
 
-    @section Scripts {
-        @{
-            await Html.RenderPartialAsync("_ValidationScriptsPartial");
-        }
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
     }
